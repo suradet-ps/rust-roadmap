@@ -9,7 +9,7 @@ path = "src/lib.rs"
 
 [dependencies]
 # Web Framework
-leptos = { version = "0.6", features = ["csr"] }
+leptos = { version = "0.8", features = ["csr"] }
 
 # Web APIs for DOM manipulation
 web-sys = { version = "0.3", features = [
