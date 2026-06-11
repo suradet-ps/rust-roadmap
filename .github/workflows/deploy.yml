@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   # 1. Check Lint & Test
@@ -16,10 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # version v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@29eef336d9b2848a0b548edc03f92a220660cdb8 # stable
         with:
           targets: wasm32-unknown-unknown
           components: rustfmt, clippy
@@ -33,23 +35,27 @@ jobs:
       - name: Run tests
         run: cargo test --verbose
 
-  # 2. Build and Deploy 
+  # 2. Build and Deploy
   deploy:
     name: Build & Deploy
-    needs: check-and-test 
+    needs: check-and-test
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # version v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@29eef336d9b2848a0b548edc03f92a220660cdb8 # stable
         with:
           targets: wasm32-unknown-unknown
 
       - name: Download Trunk
-        uses: jetli/trunk-action@v0.5.1
+        uses: jetli/trunk-action@1346cc09eace4beb84e403e199a471346d4684c9 # version v0.5.1
         with:
           version: 'latest'
 
@@ -57,7 +63,7 @@ jobs:
         run: trunk build --release --public-url "/rust-roadmap/"
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # version v4.7.3
         with:
           folder: dist
           branch: gh-pages
