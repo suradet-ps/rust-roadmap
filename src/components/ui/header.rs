@@ -1,6 +1,6 @@
 use crate::components::ui::progress_bar::ProgressBar;
-use leptos::wasm_bindgen::JsCast;
 use leptos::prelude::*;
+use leptos::wasm_bindgen::JsCast;
 
 #[component]
 pub fn Header(search_term: ReadSignal<String>, on_search: Callback<String>) -> impl IntoView {
