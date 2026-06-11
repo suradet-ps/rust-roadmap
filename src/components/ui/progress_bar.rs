@@ -4,7 +4,7 @@
 //! together with a "X/Y · Z%" completion label.
 
 use crate::state::roadmap_state::RoadmapState;
-use leptos::*;
+use leptos::prelude::*;
 
 /// Thin progress bar rendered inside the sticky header.
 ///

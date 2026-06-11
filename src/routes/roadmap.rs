@@ -7,7 +7,7 @@ use crate::data::get_topic_content;
 use crate::data::{SECTIONS, get_all_dependencies, get_all_topics};
 use crate::layout::tree::{LayoutConfig, compute_layout};
 use crate::state::roadmap_state::RoadmapState;
-use leptos::*;
+use leptos::prelude::*;
 
 #[component]
 pub fn RoadmapPage() -> impl IntoView {
@@ -46,7 +46,7 @@ pub fn RoadmapPage() -> impl IntoView {
   // -----------------------------------------------------------------------
   // Derived signals
   // -----------------------------------------------------------------------
-  let is_drawer_open = create_memo(move |_| selected_topic_id.get().is_some());
+  let is_drawer_open = Memo::new(move |_| selected_topic_id.get().is_some());
 
   // -----------------------------------------------------------------------
   // Diagram props (on_topic_click now lives inside RoadmapDiagram via context)
@@ -90,7 +90,7 @@ pub fn RoadmapPage() -> impl IntoView {
                       "drawer-backdrop"
                   }
               }
-              on:click=move |_| handle_close_detail.call(())
+              on:click=move |_| handle_close_detail.run(())
           />
 
           // Detail drawer — re-mounts whenever the selected topic changes

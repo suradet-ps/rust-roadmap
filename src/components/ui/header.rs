@@ -1,34 +1,26 @@
 use crate::components::ui::progress_bar::ProgressBar;
 use leptos::wasm_bindgen::JsCast;
-use leptos::*;
+use leptos::prelude::*;
 
 #[component]
 pub fn Header(search_term: ReadSignal<String>, on_search: Callback<String>) -> impl IntoView {
-  let (is_scrolled, set_is_scrolled) = create_signal(false);
+  let (is_scrolled, set_is_scrolled) = signal(false);
 
-  create_effect(move |_| {
-    if let Some(window) = web_sys::window() {
-      let closure = leptos::wasm_bindgen::closure::Closure::wrap(Box::new(move || {
-        if let Some(w) = web_sys::window() {
-          let scrolled = w.scroll_y().unwrap_or(0.0) > 20.0;
-          set_is_scrolled.set(scrolled);
-        }
-      }) as Box<dyn Fn()>);
+  if let Some(window) = web_sys::window() {
+    let closure = leptos::wasm_bindgen::closure::Closure::wrap(Box::new(move || {
+      if let Some(w) = web_sys::window() {
+        let scrolled = w.scroll_y().unwrap_or(0.0) > 20.0;
+        set_is_scrolled.set(scrolled);
+      }
+    }) as Box<dyn Fn()>);
 
-      let _ = window.add_event_listener_with_callback("scroll", closure.as_ref().unchecked_ref());
-
-      on_cleanup(move || {
-        if let Some(window) = web_sys::window() {
-          let _ =
-            window.remove_event_listener_with_callback("scroll", closure.as_ref().unchecked_ref());
-        }
-      });
-    }
-  });
+    let _ = window.add_event_listener_with_callback("scroll", closure.as_ref().unchecked_ref());
+    closure.forget();
+  }
 
   let handle_input = move |ev| {
     let value = event_target_value(&ev);
-    on_search.call(value);
+    on_search.run(value);
   };
 
   view! {

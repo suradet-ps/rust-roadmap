@@ -1,4 +1,4 @@
-use leptos::*;
+use leptos::prelude::*;
 use rust_roadmap::app::App;
 
 fn main() {

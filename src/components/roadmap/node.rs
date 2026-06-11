@@ -1,7 +1,7 @@
 //! SVG node component for rendering roadmap topics.
 
 use crate::models::roadmap::{Level, NodeStatus, TopicType};
-use leptos::*;
+use leptos::prelude::*;
 
 #[derive(Clone, Debug)]
 pub struct NodeData {
@@ -68,7 +68,7 @@ pub fn RoadmapNode(props: NodeData) -> impl IntoView {
       <g
           class=class_attr
           data-topic-id=props.id
-          on:click=move |_| props.on_click.call(props.id)
+          on:click=move |_| props.on_click.run(props.id)
           style=cursor_style
       >
           <rect

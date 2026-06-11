@@ -3,7 +3,7 @@
 
 use crate::models::roadmap::NodeStatus;
 use crate::storage::local_storage;
-use leptos::*;
+use leptos::prelude::*;
 use std::collections::HashMap;
 
 /// Central state store passed through Leptos context.
@@ -35,9 +35,9 @@ impl RoadmapState {
   pub fn new(total_topics: usize) -> Self {
     // Hydrate initial progress from localStorage.
     let initial = local_storage::load_progress();
-    let progress = create_rw_signal(initial);
+    let progress = RwSignal::new(initial);
 
-    let completed_count = create_memo(move |_| {
+    let completed_count = Memo::new(move |_| {
       progress
         .get()
         .values()
@@ -45,7 +45,7 @@ impl RoadmapState {
         .count()
     });
 
-    let completion_pct = create_memo(move |_| {
+    let completion_pct = Memo::new(move |_| {
       if total_topics == 0 {
         return 0.0_f64;
       }
@@ -53,14 +53,14 @@ impl RoadmapState {
     });
 
     // Auto-persist to localStorage whenever progress changes.
-    create_effect(move |_| {
+    Effect::new(move |_| {
       let p = progress.get();
       local_storage::save_progress(&p);
     });
 
     Self {
-      search_term: create_rw_signal(String::new()),
-      selected_topic_id: create_rw_signal(None),
+      search_term: RwSignal::new(String::new()),
+      selected_topic_id: RwSignal::new(None),
       progress,
       total_topics,
       completed_count,

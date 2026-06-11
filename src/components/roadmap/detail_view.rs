@@ -1,6 +1,6 @@
 use crate::models::roadmap::{BadgeKind, NodeStatus, TopicContent};
 use crate::state::roadmap_state::RoadmapState;
-use leptos::*;
+use leptos::prelude::*;
 
 #[component]
 pub fn TopicDetail(
@@ -13,7 +13,7 @@ pub fn TopicDetail(
   let state = use_context::<RoadmapState>().expect("RoadmapState context not found");
 
   // Reactive current status for this topic
-  let current_status = create_memo(move |_| {
+  let current_status = Memo::new(move |_| {
     state
       .progress
       .get()
@@ -52,7 +52,7 @@ pub fn TopicDetail(
               </div>
               <button
                   class="drawer__close"
-                  on:click=move |_| on_close.call(())
+                  on:click=move |_| on_close.run(())
                   aria-label="Close drawer"
               >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -191,7 +191,7 @@ pub fn TopicDetail(
                               <div class="drawer__empty">
                                   "No resources listed yet."
                               </div>
-                          }.into_view()
+                          }.into_any()
                       } else {
                           content.resources.iter().map(|res| {
                               let badge_class = match res.badge {
@@ -252,7 +252,7 @@ pub fn TopicDetail(
                                       </div>
                                   </a>
                               }
-                          }).collect_view()
+                          }).collect_view().into_any()
                       }}
                   </div>
               </div>

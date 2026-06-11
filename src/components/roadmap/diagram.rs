@@ -11,7 +11,7 @@ use crate::components::roadmap::node::{NodeData, RoadmapNode};
 use crate::layout::tree::{LayoutConfig, LayoutResult, TopicPosition};
 use crate::models::roadmap::{Dependency, Topic};
 use crate::state::roadmap_state::RoadmapState;
-use leptos::*;
+use leptos::prelude::*;
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -111,7 +111,7 @@ pub fn RoadmapDiagram(props: DiagramData) -> impl IntoView {
   });
 
   // Pre-compute lowercased search term once per change.
-  let search_lc = create_memo(move |_| search_term.get().to_lowercase());
+  let search_lc = Memo::new(move |_| search_term.get().to_lowercase());
 
   // Snapshot values for use in closures.
   let config = props.config;
@@ -125,7 +125,7 @@ pub fn RoadmapDiagram(props: DiagramData) -> impl IntoView {
 
   {
     let last_scrolled = Rc::clone(&last_scrolled);
-    create_effect(move |_| {
+    Effect::new(move |_| {
       let term = search_lc.get();
       if term.len() < 2 {
         *last_scrolled.borrow_mut() = None;

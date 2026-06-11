@@ -1,6 +1,6 @@
 //! Section group box SVG component.
 
-use leptos::*;
+use leptos::prelude::*;
 
 /// Data for rendering a single section group box.
 #[derive(Clone, Debug, PartialEq)]
