@@ -8,7 +8,7 @@ use leptos::prelude::*;
 
 /// Thin progress bar rendered inside the sticky header.
 ///
-/// No props required — all data is pulled from [`RoadmapState`] context.
+/// No props required - all data is pulled from [`RoadmapState`] context.
 #[component]
 pub fn ProgressBar() -> impl IntoView {
   let state = use_context::<RoadmapState>().expect("RoadmapState context not found");

@@ -86,7 +86,7 @@ pub fn TopicDetail(
                                       NodeStatus::Done       => "✓ Done".to_string(),
                                       NodeStatus::InProgress => "⟳ In Progress".to_string(),
                                       NodeStatus::Skipped    => "⊘ Skipped".to_string(),
-                                      NodeStatus::Untouched  => "— Untouched".to_string(),
+                                      NodeStatus::Untouched  => "- Untouched".to_string(),
                                   }
                               }}
                           </span>

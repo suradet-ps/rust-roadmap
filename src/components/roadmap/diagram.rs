@@ -225,12 +225,12 @@ pub fn RoadmapDiagram(props: DiagramData) -> impl IntoView {
       >
           <ArrowheadMarker />
 
-          // Groups layer — behind edges and nodes
+          // Groups layer - behind edges and nodes
           <g class="groups-layer">
               {group_views}
           </g>
 
-          // Edges layer — static, rendered once
+          // Edges layer - static, rendered once
           <g class="edges-layer">
               {edge_props
                   .into_iter()
@@ -238,7 +238,7 @@ pub fn RoadmapDiagram(props: DiagramData) -> impl IntoView {
                   .collect_view()}
           </g>
 
-          // Nodes layer — reactive on search + progress
+          // Nodes layer - reactive on search + progress
           <g class="nodes-layer">
               {move || {
                   let term = search_lc.get();

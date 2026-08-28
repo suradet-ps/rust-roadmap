@@ -18,11 +18,11 @@
 
 ## Features
 
-- **Comprehensive Learning Path** — 27 curated sections covering Rust from fundamentals to advanced domains including WebAssembly, embedded systems, and game development.
-- **Interactive Detail View** — Click any topic to reveal a slide-in drawer with descriptions and curated learning resources (Official docs, Books, Videos, Articles, and more).
-- **Deterministic Layout** — Custom "Fishbone" positioning algorithm ensures pixel-perfect, consistent visualization across all devices.
-- **Compile-Time Validation** — All topics, dependencies, and content are Rust structs verified at compile time. Invalid links or missing data break the build.
-- **Premium Dark Theme** — Carefully designed CSS token system with orange/red accents inspired by Rust's brand identity.
+- **Comprehensive Learning Path** - 27 curated sections covering Rust from fundamentals to advanced domains including WebAssembly, embedded systems, and game development.
+- **Interactive Detail View** - Click any topic to reveal a slide-in drawer with descriptions and curated learning resources (Official docs, Books, Videos, Articles, and more).
+- **Deterministic Layout** - Custom "Fishbone" positioning algorithm ensures pixel-perfect, consistent visualization across all devices.
+- **Compile-Time Validation** - All topics, dependencies, and content are Rust structs verified at compile time. Invalid links or missing data break the build.
+- **Premium Dark Theme** - Carefully designed CSS token system with orange/red accents inspired by Rust's brand identity.
 
 ---
 
@@ -178,8 +178,8 @@ Contributions are welcome! Please follow these guidelines:
 
 1. Locate or create the appropriate section in `src/data/sections/`.
 2. Add the `Topic` struct to `mod.rs` with correct `Placement`:
-   - `Placement::Center` — Main spine topics only
-   - `Placement::Left` or `Placement::Right` — Branch topics
+   - `Placement::Center` - Main spine topics only
+   - `Placement::Left` or `Placement::Right` - Branch topics
 3. Add `Dependency` entries connecting the new topic to existing ones.
 4. Add `TopicContent` in `content.rs` with description and resources.
 5. Run `cargo build` to verify compile-time validity.

@@ -25,7 +25,7 @@ pub struct RoadmapState {
   /// Reactive count of Done + Skipped topics.
   pub completed_count: Memo<usize>,
 
-  /// Reactive completion percentage 0.0 – 100.0.
+  /// Reactive completion percentage 0.0 - 100.0.
   pub completion_pct: Memo<f64>,
 }
 
@@ -68,7 +68,7 @@ impl RoadmapState {
     }
   }
 
-  /// Read the current status of a topic (reactive – reads the signal).
+  /// Read the current status of a topic (reactive - reads the signal).
   pub fn get_status(&self, topic_id: &str) -> NodeStatus {
     self
       .progress

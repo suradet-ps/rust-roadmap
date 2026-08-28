@@ -46,7 +46,7 @@ pub fn SectionGroup(props: GroupBoxData) -> impl IntoView {
               ry="6"
               class="section-group__bg"
           />
-          // Header bar — rounded top corners only.
+          // Header bar - rounded top corners only.
           // Step 1: draw a rect with all corners rounded (matches the bg).
           <rect
               x=x

@@ -23,7 +23,7 @@ pub fn RoadmapPage() -> impl IntoView {
   let layout = compute_layout(SECTIONS, static_topics, static_deps, &config);
 
   // -----------------------------------------------------------------------
-  // Global state — provide via context so all child components can access it
+  // Global state - provide via context so all child components can access it
   // -----------------------------------------------------------------------
   let state = RoadmapState::new(total_topics);
   provide_context(state);
@@ -93,7 +93,7 @@ pub fn RoadmapPage() -> impl IntoView {
               on:click=move |_| handle_close_detail.run(())
           />
 
-          // Detail drawer — re-mounts whenever the selected topic changes
+          // Detail drawer - re-mounts whenever the selected topic changes
           {move || {
               let topic_id = selected_topic_id.get()?;
               let content = get_topic_content(topic_id)?;
