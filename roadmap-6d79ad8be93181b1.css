@@ -100,7 +100,7 @@
 
 .roadmap-diagram {
     display: block;
-    /* Do NOT constrain width — the SVG has explicit width/height attributes
+    /* Do NOT constrain width - the SVG has explicit width/height attributes
        and must be allowed to render at its natural pixel size so the
        .roadmap-container overflow-x: auto scrollbar activates correctly. */
 }

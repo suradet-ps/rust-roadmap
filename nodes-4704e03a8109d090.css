@@ -6,7 +6,7 @@
  */
 
 /* -----------------------------------------------------------------------------
- * Done State — muted green tint
+ * Done State - muted green tint
  * -------------------------------------------------------------------------- */
 
 .node-done .node-rect {
@@ -20,7 +20,7 @@
 }
 
 /* -----------------------------------------------------------------------------
- * In-Progress State — orange left accent
+ * In-Progress State - orange left accent
  * -------------------------------------------------------------------------- */
 
 .node-in-progress .node-rect {
@@ -38,7 +38,7 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Skipped State — reduced opacity, muted colour
+ * Skipped State - reduced opacity, muted colour
  * -------------------------------------------------------------------------- */
 
 .node-skipped .node-rect {
@@ -53,7 +53,7 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Dimmed State — non-matching search results
+ * Dimmed State - non-matching search results
  * -------------------------------------------------------------------------- */
 
 .node-dimmed {
