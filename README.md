@@ -1,224 +1,140 @@
-<div align="center">
+# Rust Roadmap
 
-# Rust Roadmap 🦀
-
-[![Rust](https://img.shields.io/badge/Rust-Edition_2024-000000?logo=rust&logoColor=white)](https://www.rust-lang.org/)
-[![Leptos](https://img.shields.io/badge/Leptos-0.6-FF8937)](https://leptos.dev/)
-[![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?logo=webassembly&logoColor=white)](https://webassembly.org/)
-[![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
-[![Deploy](https://img.shields.io/github/actions/workflow/status/suradet-ps/rust-roadmap/deploy.yml?label=Deploy)](https://github.com/suradet-ps/rust-roadmap/actions)
-
-**An interactive, type-safe visualization of the Rust learning path.**
-
-[**View Live Demo →**](https://suradet-ps.github.io/rust-roadmap/)
-
-</div>
-
----
-
-## Features
-
-- **Comprehensive Learning Path** - 27 curated sections covering Rust from fundamentals to advanced domains including WebAssembly, embedded systems, and game development.
-- **Interactive Detail View** - Click any topic to reveal a slide-in drawer with descriptions and curated learning resources (Official docs, Books, Videos, Articles, and more).
-- **Deterministic Layout** - Custom "Fishbone" positioning algorithm ensures pixel-perfect, consistent visualization across all devices.
-- **Compile-Time Validation** - All topics, dependencies, and content are Rust structs verified at compile time. Invalid links or missing data break the build.
-- **Premium Dark Theme** - Carefully designed CSS token system with orange/red accents inspired by Rust's brand identity.
-
----
-
-## Architecture
-
-This project enforces strict **separation of concerns** between content, layout logic, and rendering.
-
-```text
-src/
-├── data/               # Content definitions (Source of Truth)
-│   ├── mod.rs          # Aggregates all sections, topics, dependencies
-│   └── sections/       # 27 modular section directories
-│       └── s01_introduction/
-│           ├── mod.rs      # Topics & Dependencies
-│           └── content.rs  # Descriptions & Resources
-├── models/             # Domain types (Topic, Section, Resource, etc.)
-├── layout/             # Deterministic coordinate calculation
-│   └── tree.rs         # "Fishbone" layout algorithm
-├── components/         # Leptos UI components
-│   ├── roadmap/        # Diagram, nodes, edges, detail drawer
-│   └── ui/             # Header, footer, hero
-├── state/              # Global reactive state (Leptos signals)
-└── styles/             # CSS design system (theme tokens, components)
+```
+██████╗ ██╗   ██╗ ██████╗████████╗██████╗  ██████╗  █████╗ ██████╗ ███╗   ███╗ █████╗ ██████╗
+██╔══██╗██║   ██║██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗██╔══██╗██╔══██╗████╗ ████║██╔══██╗██╔══██╗
+██████╔╝██║   ██║███████╗   ██║   ██████╔╝██║   ██║███████║██║  ██║██╔████╔██║███████║██████╔╝
+██╔══██╗██║   ██║╚════██║   ██║   ██╔══██╗██║   ██║██╔══██║██║  ██║██║╚██╔╝██║██╔══██║██╔═══╝
+██║  ██║╚██████╔╝██████╔╝   ██║   ██║  ██║╚██████╔╝██║  ██║██████╔╝██║ ╚═╝ ██║██║  ██║██║
+╚═╝  ╚═╝ ╚═════╝ ╚═════╝   ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝
 ```
 
-### Design Decisions
+---
 
-| Decision | Rationale |
-|----------|-----------|
-| **Explicit `Placement` enums** | Node coordinates are derived from `Center`, `Left`, or `Right` placement types rather than force-directed algorithms. This guarantees visual fidelity to the intended design and eliminates layout randomness. |
-| **Data in Rust, not JSON** | Topics and dependencies are Rust `const` structs. The compiler validates references, preventing broken links or orphan topics that would silently fail with external data files. |
-| **Section-based modularity** | Each learning section is an isolated module (`s01_introduction`, `s02_setup`, etc.) with its own topics, dependencies, and content. Adding new content cannot break existing sections. |
-| **Fine-grained reactivity** | Leptos signals provide precise DOM updates. Only the changed nodes re-render, not the entire tree. |
+## ◆ PULSE
+
+Every Rust learner has asked the same question: *what do I learn next?*
+Rust Roadmap answers it with a map - 27 curated sections from
+fundamentals to WebAssembly, embedded systems, and game development,
+drawn as an interactive fishbone where dependencies point the way.
+Click a topic and a drawer opens with the best of what exists to learn
+it: official docs, books, videos, courses, crates. The layout never
+moves beneath you, and the data is compiled, not stored - a broken
+link breaks the build, never the learner.
+
+| 27 sections ▣ | Fishbone ▣ | Resources ▣ | Compile-checked ▣ |
+|---|---|---|---|
+
+*The map - data, layout, drawer - is sealed.*
+
+> Built with Rust 2024 + Leptos 0.8, drawn by a deterministic fishbone
+> algorithm, shipped to GitHub Pages by one workflow.
+>
+> **suradet-ps**, artifact keeper
 
 ---
 
-## Tech Stack
+## ◆ IGNITION
 
-| Technology | Purpose |
-|------------|---------|
-| **Rust** (Edition 2024) | Systems language with memory safety guarantees |
-| **Leptos 0.6** | Fine-grained reactive framework for CSR |
-| **WebAssembly** | Compile target for browser execution |
-| **Trunk** | WASM bundler and development server |
-| **Lightning CSS** | CSS transformation and minification |
-| **GitHub Actions** | CI/CD for linting, testing, and GitHub Pages deployment |
+One target, one tool, one command.
 
----
-
-## Getting Started
-
-### Prerequisites
-
-Ensure you have the Rust toolchain installed. Then add the WebAssembly target and install Trunk:
-
-```bash
-# Add WASM target
-rustup target add wasm32-unknown-unknown
-
-# Install Trunk bundler
-cargo install trunk
+```
+⟫ rustup target add wasm32-unknown-unknown
+⟫ cargo install trunk
+⟫ trunk serve --open
 ```
 
-### Development
+Open [http://127.0.0.1:8080](http://127.0.0.1:8080).
 
-```bash
-# Clone the repository
-git clone https://github.com/suradet-ps/rust-roadmap.git
-cd rust-roadmap
+The release artifact: `⟫ trunk build --release` - optimized output in
+`dist/`, deployed to [GitHub Pages](https://suradet-ps.github.io/rust-roadmap/).
 
-# Start development server with hot reload
-trunk serve --open
-```
+<details>
+<summary>Prerequisites</summary>
 
-The application will be available at `http://127.0.0.1:8080`.
+- [Rust](https://www.rust-lang.org/) toolchain (edition 2024)
+- [Trunk](https://trunkrs.dev/) - installed above
 
-### Production Build
-
-```bash
-trunk build --release
-```
-
-Optimized artifacts are generated in the `dist/` directory.
+</details>
 
 ---
 
-## Content Structure
+## ◆ ANATOMY
 
-Each section follows a consistent module pattern:
+Three layers, one rule: content never touches layout, layout never
+touches rendering.
 
-```rust
-// src/data/sections/s01_introduction/mod.rs
+- **Defines** - `data/` is the source of truth: 27 modular section
+  directories, each a Rust module holding its topics, dependencies,
+  and content. The compiler validates every reference - orphan topics
+  and dead links are build errors, not page bugs.
+- **Positions** - `layout/tree.rs` runs the fishbone algorithm on
+  explicit `Placement` enums (`Center` / `Left` / `Right`): coordinates
+  are derived, never force-directed - the map looks the same on every
+  device, every visit.
+- **Renders** - Leptos components draw nodes, edges, and the detail
+  drawer; fine-grained reactivity re-renders only the node that
+  changed, never the whole tree.
+- **Explains** - each topic opens a drawer with descriptions and
+  curated resources, tagged by kind: Official, Book, Article, Video,
+  Course, Interactive, Crate, OpenSource, Community, Podcast,
+  Newsletter.
+- **Wears** - a premium dark theme on a CSS token system with Rust's
+  orange and red - the map reads like the language it teaches.
 
-pub const SECTION_ID: &str = "intro_sec";
+---
 
-pub fn get_topics() -> Vec<Topic> {
-    vec![
-        Topic {
-            id: "intro",
-            title: "Introduction",
-            section_id: SECTION_ID,
-            level: Level::Beginner,
-            topic_type: TopicType::Main,    // Center spine
-            placement: Placement::Center,
-            row: None,
-        },
-        Topic {
-            id: "what_is_rust",
-            title: "What is Rust?",
-            section_id: SECTION_ID,
-            level: Level::Beginner,
-            topic_type: TopicType::Sub,     // Branch node
-            placement: Placement::Right,
-            row: None,
-        },
-        // ...
-    ]
-}
+## ◆ RITUALS
 
-pub fn get_dependencies() -> Vec<Dependency> {
-    vec![
-        Dependency { from: "intro", to: "what_is_rust" },
-        // ...
-    ]
-}
+**The core ceremony** - the next topic:
+
+1. Open the map. The fishbone shows the path from fundamentals to the
+   far domains.
+2. Find the topic you are on; its dependencies say what comes next.
+3. Click it. The drawer slides in: the description, then the resources,
+   each tagged by kind.
+4. Learn, advance, repeat - the layout stays still while the learner
+   moves.
+
+**The ceremony of the compiled map** - the data is Rust `const`
+structs, so the map cannot contain what the compiler rejects. Adding a
+section means adding a module - and the build either accepts the map
+or refuses it.
+
+**The ceremony of the still layout** - no force-directed jitter, no
+random placement, no map that rearranges itself under the cursor. The
+fishbone is deterministic because learning is not a lottery.
+
+---
+
+## ◆ ECHOES
+
+**Where this artifact is heading**
+
+```
+data     ▸ 27 modular sections, compile-time validated ────────────── ▸ sealed
+layout   ▸ fishbone algorithm, explicit placement ─────────────────── ▸ sealed
+drawer   ▸ resources by semantic badge ────────────────────────────── ▸ sealed
+deliver  ▸ GitHub Pages, one deploy workflow ──────────────────────── ▸ sealed
 ```
 
-### Resource Badges
+**Raising the artifact** - adding a topic follows the documented
+ritual: section module, `Topic` with correct `Placement`, `Dependency`
+edges, `TopicContent` in `content.rs`, then `cargo build` as the
+verdict. Gates: `cargo fmt --all -- --check`, `cargo clippy
+--all-targets -- -D warnings`, `cargo test --verbose`. Open an issue
+first to discuss a change.
 
-Content resources are categorized with semantic badges:
-
-| Badge | Use Case |
-|-------|----------|
-| `Official` | Rust Book, std docs, rust-lang.org |
-| `Book` | Digital or physical books |
-| `Article` | Blog posts and tutorials |
-| `Video` | YouTube, conference talks |
-| `Course` | Structured learning series |
-| `Interactive` | Rustlings, exercism.io |
-| `Crate` | crates.io, docs.rs links |
-| `OpenSource` | GitHub repositories |
-| `Community` | Reddit, Discord, forums |
-| `Podcast` | Audio content |
-| `Newsletter` | This Week in Rust, etc. |
+**Status** - CI gates every push and deploys to GitHub Pages.
+[Watch the gates](.github/workflows).
 
 ---
 
-## Contributing
-
-Contributions are welcome! Please follow these guidelines:
-
-### Adding a New Topic
-
-1. Locate or create the appropriate section in `src/data/sections/`.
-2. Add the `Topic` struct to `mod.rs` with correct `Placement`:
-   - `Placement::Center` - Main spine topics only
-   - `Placement::Left` or `Placement::Right` - Branch topics
-3. Add `Dependency` entries connecting the new topic to existing ones.
-4. Add `TopicContent` in `content.rs` with description and resources.
-5. Run `cargo build` to verify compile-time validity.
-
-### Code Quality
-
-This project enforces strict quality checks via CI:
-
-```bash
-# Format check
-cargo fmt --all -- --check
-
-# Linting
-cargo clippy --all-targets -- -D warnings
-
-# Tests
-cargo test --verbose
+```
+  ─────────────────────────────────────────
+   A roadmap that moves under you
+   is a roadmap that lies.
+  ─────────────────────────────────────────
 ```
 
-### Pull Request Process
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes with clear messages
-4. Ensure all CI checks pass
-5. Open a Pull Request with a description of your changes
-
----
-
-## License
-
-This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
-
----
-
-<div align="center">
-
-**Built with 🦀 by the Rust community**
-
-[Report Bug](https://github.com/suradet-ps/rust-roadmap/issues) · [Request Feature](https://github.com/suradet-ps/rust-roadmap/issues)
-
-</div>
+Licensed under the [MIT License](LICENSE).
